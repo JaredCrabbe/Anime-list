@@ -1,7 +1,7 @@
 const searchBar = document.getElementById("search-bar")
 const searchBtn = document.getElementById("search-btn")
 const seasonal = document.getElementById("recommended-slider")
-const seasonal1 = document.getElementById("slider")
+const container = document.getElementById("slider")
 
 
 const rankingUrl = 'https://anime-db.p.rapidapi.com/anime/by-ranking/';
@@ -15,16 +15,19 @@ const options = {
 
 
 
-
-
-
 async function getRanked(){
     try {
         for(let i = 1; i <= 10; i++){
             const response = await fetch(rankingUrl + `${i}`, options);
             const result = await response.json();
-            console.log(result);
-            // seasonal.style.backgroundImage = `url(${result["image"]})`
+
+                console.log(result);
+
+            const div = document.createElement("div")
+                div.classList.add( `slide`)
+                div.style.backgroundImage = `url(${result["image"]})`
+                seasonal.style.backgroundImage = `url(${result["image"]})`
+                container.appendChild(div);
             // seasonal1.style.backgroundImage = `url(${result["image"]})`
     }
     } catch (error) {
