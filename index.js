@@ -17,18 +17,38 @@ const options = {
 
 async function getRanked(){
     try {
-        for(let i = 1; i <= 10; i++){
+        for(let i = 1; i <= 1; i++){
+            const div = document.createElement("div")
+            const div2 = document.createElement("div")
+
             const response = await fetch(rankingUrl + `${i}`, options);
             const result = await response.json();
 
                 console.log(result);
 
-            const div = document.createElement("div")
+            
                 div.classList.add( `slide`)
                 div.style.backgroundImage = `url(${result["image"]})`
-                seasonal.style.backgroundImage = `url(${result["image"]})`
-                container.appendChild(div);
-            // seasonal1.style.backgroundImage = `url(${result["image"]})`
+                if(i === 1) {
+                    div.setAttribute("data-active", "")
+                    div2.setAttribute("data-active", "")
+                    seasonal.style.backgroundImage = `url(${result["image"]})`
+                }
+                div2.classList.add("slide-info")
+                div2.innerHTML = 
+                `<h1>${result.title}</h1>
+                    <p>${result.type} &#160&#160&#160 Rank #${result.ranking} &#160&#160&#160&#160 ${result.status}</p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    <p>${result.synopsis}
+                `
+                
+                container.appendChild(div)
+                container.appendChild(div2)
     }
     } catch (error) {
         console.error(error);
