@@ -26,25 +26,96 @@ header{
 }
 
 #recommended-slider{
-    filter: blur(10px);
-    background-size : 100%;
+    position: relative;
+    border-radius: 15px;
+    background-size : 99%;
     background-repeat:  no-repeat;
-    background-position : left;
+    background-position : right;
     z-index: 1;
+    overflow: hidden;
+}
+
+
+#recommended-slider::after{
+    display: block;
+    position: absolute;
+    border-radius: 11px;
+    background-image: linear-gradient(to bottom, rgb(17, 17, 17) 0, rgba(255,255,255, 0) 50%, rgba(17,17,17, 1) 100%);
+    content: '';
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
+    opacity: 1;
+}
+
+#recommended-slider::before{
+    border-radius: 15px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99%;
+    height: 100%;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+    
 }
 
 #slider{
     display: flex;
     position: absolute;
-    top: 57px;
-    left: 300px;
-    width: 1300px;
+    height: 350px;
+    max-width: 1300px;
+    width: 100%;
+    z-index: 10;
+}
+
+.slide{
+    position: absolute;
+    width: 19%;
     border-radius: 15px;
     background-size : contain;
     background-repeat:  no-repeat;
     background-position : left;
     height: 350px;
     z-index: 10;
+    opacity: 0;
+    transition: 500ms ease-in-out;
+}
+
+.slide-info{
+    position: absolute;
+    width: 80%;
+    height: inherit;
+    left: 20%;
+    overflow: auto;
+}
+
+.slide-info h1{
+    font-size: 3rem;
+    color: rgb(214, 213, 213);
+    text-shadow: 2px 2px black;
+}
+
+.slide-info p {
+    font-size: 1.2rem;
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 1px black;
+}
+
+div[class^="slide-info"]{
+    visibility: hidden;
+}
+
+div[class^="slide-info"][data-active]{
+    visibility: visible;
+}
+
+
+div[class^="slide"][data-active]{
+    opacity: 1;
 }
 
 .nav-bar{
